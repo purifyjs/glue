@@ -1,0 +1,16 @@
+{
+  "version": "4",
+  "specifiers": {
+    "jsr:@purifyjs/core@0.2": "0.2.0"
+  },
+  "jsr": {
+    "@purifyjs/core@0.2.0": {
+      "integrity": "39651d6c93b94a69849952d7c98da6ee3e7479c8aac0fb49be022aacfdea2a60"
+    }
+  },
+  "workspace": {
+    "dependencies": [
+      "jsr:@purifyjs/core@0.2"
+    ]
+  }
+}

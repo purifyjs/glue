@@ -1,0 +1,17 @@
+{
+    "imports": {
+        "@purifyjs/core": "jsr:@purifyjs/core@^0.2.0"
+    },
+    "compilerOptions": {
+        "lib": [
+            "dom",
+            "esnext"
+        ]
+    },
+    "fmt": {
+        "lineWidth": 140,
+        "indentWidth": 4
+    },
+    "exports": {
+    }
+}
