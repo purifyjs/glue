@@ -5,6 +5,23 @@ export function useReplaceChildren<T extends Member>(signal: Sync<T>): Lifecycle
     return (element) => signal.follow((member) => element.replaceChildren(toChild(member)), true);
 }
 
+export function useIgnoreBubbledEvents(eventName: string): Lifecycle.OnConnected {
+    return (element) => {
+        const abortController = new AbortController();
+        element.addEventListener(eventName, (event) => {
+            if (event.target !== element) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+            }
+        }, { signal: abortController.signal });
+
+        return () => {
+            abortController.abort();
+        };
+    };
+}
+
+
 export function useTextContent(value: Sync.Ref<string>): Lifecycle.OnConnected<HTMLTextAreaElement> {
     return (element) => {
         const abortController = new AbortController();
