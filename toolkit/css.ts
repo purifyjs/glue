@@ -44,12 +44,3 @@ export class CssTemplate {
         };
     }
 }
-
-const SKIP = 'div[style="display:contents"]';
-export function qss<TParent extends string, TCombinator extends "+" | "~" | ">", TChild extends string>(
-    parent: TParent,
-    combinator: TCombinator,
-    child: TChild,
-) {
-    return `${parent} ${SKIP} ${combinator} ${child}:not(${parent} ${SKIP} ${combinator} ${child} ${child})` as const;
-}
