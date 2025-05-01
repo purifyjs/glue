@@ -1,8 +1,11 @@
 import { computed, ref, Sync } from "@purifyjs/core";
 
-export function awaited<T, const U = null>(
+export function awaited<T>(
+    promise: Promise<T>
+): Sync<T | null>;
+export function awaited<T, const U>(
     promise: Promise<T>,
-    until?: U,
+    until: U,
 ): Sync<T | U>;
 export function awaited(
     promise: Promise<unknown>,
