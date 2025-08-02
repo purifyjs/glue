@@ -1,13 +1,13 @@
 // deno-lint-ignore-file no-explicit-any
 import { computed, Member, Sync } from "@purifyjs/core";
 
-export type SyncUnroll<T> = Sync<Extract<T, Sync<any>>> extends Extract<T, Sync<any>>
-	? SyncUnroll_Recurvesive<Extract<T, Sync<any>>> | SyncUnroll_Normal<Exclude<T, Sync<any>>>
-	: SyncUnroll_Normal<T>;
+export type SyncUnroll<T> = Sync<T> extends T
+	? SyncUnroll_Infinite<Extract<T, Sync<any>>> | SyncUnroll_Finite<Exclude<T, Sync<any>>>
+	: SyncUnroll_Finite<T>;
 
-type SyncUnroll_Normal<T> = T extends Sync<infer U> ? SyncUnroll_Normal<U> : T;
-type SyncUnroll_Recurvesive<T, SyncExcluded = Exclude<T, Sync<any>>> = [SyncExcluded] extends [never]
-	? T extends Sync<infer U> ? SyncUnroll_Recurvesive<U> : T
+type SyncUnroll_Finite<T> = T extends Sync<infer U> ? SyncUnroll_Finite<U> : T;
+type SyncUnroll_Infinite<T, SyncExcluded = Exclude<T, Sync<any>>> = [SyncExcluded] extends [never]
+	? T extends Sync<infer U> ? SyncUnroll_Infinite<U> : T
 	: SyncExcluded;
 
 export function unroll<T>(signal: T): Sync<SyncUnroll<T>>;
