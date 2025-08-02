@@ -25,8 +25,13 @@ export function unroll(signal: Sync<unknown>) {
 type sym = typeof sym;
 declare const sym: unique symbol;
 
-type _1 = SyncUnroll<Sync<Sync<Sync<Sync<"world"> | number>> | sym>>;
-type _2 = SyncUnroll<Sync<Sync<Member>>>;
-type _3 = SyncUnroll<Sync<Sync<string>>>;
-type _4 = SyncUnroll<Sync<Sync<Sync<"world"> | number>> | sym>;
-type _5 = SyncUnroll<Sync<Sync<Member>> | sym>;
+declare const test_1: SyncUnroll<Sync<Sync<Sync<Sync<"world"> | number>> | sym>>;
+test_1 satisfies "world" | number | sym;
+declare const test_2: SyncUnroll<Sync<Sync<Member>>>;
+test_2 satisfies Member;
+declare const test_3: SyncUnroll<Sync<Sync<string>>>;
+test_3 satisfies string;
+declare const test_4: SyncUnroll<Sync<Sync<Sync<"world"> | number>> | sym>;
+test_4 satisfies "world" | number | sym;
+declare const test_5: SyncUnroll<Sync<Sync<Member>> | sym>;
+test_5 satisfies Member | sym;
